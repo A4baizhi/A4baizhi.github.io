@@ -2,95 +2,85 @@
 <html>
 <head>
     <title>Model Prediction</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js"></script>
-    <script src="tfjs_model/model.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.7.0/dist/tf.min.js"></script>
 </head>
 <body>
     <h1>Model Prediction</h1>
-    <form id="predictionForm">
-        <label for="input1">土层深度(cm):</label>
-        <input type="number" name="input1" id="input1" required><br>
-
-        <label for="input2">地膜覆盖年限:</label>
-        <input type="number" name="input2" id="input2" required><br>
-
-        <label for="input3">平均风速:</label>
-        <input type="number" name="input3" id="input3" required><br>
-
-        <label for="input4">年均温度:</label>
-        <input type="number" name="input4" id="input4" required><br>
-
-        <label for="input5">日照时数:</label>
-        <input type="number" name="input5" id="input5" required><br>
-
-        <label for="input6">相对湿度:</label>
-        <input type="number" name="input6" id="input6" required><br>
-
-        <label for="input7">平均气压:</label>
-        <input type="number" name="input7" id="input7" required><br>
-
-        <label for="input8">降水量:</label>
-        <input type="number" name="input8" id="input8" required><br>
-
-        <label for="input9">平均地温:</label>
-        <input type="number" name="input9" id="input9" required><br>
-
-        <label for="input10">年蒸发量:</label>
-        <input type="number" name="input10" id="input10" required><br>
-
-        <label for="input11">沙质占比:</label>
-        <input type="number" name="input11" id="input11" required><br>
-
-        <label for="input12">黏土占比:</label>
-        <input type="number" name="input12" id="input12" required><br>
-
-        <label for="input13">淤泥占比:</label>
-        <input type="number" name="input13" id="input13" required><br>
-
-        <label for="input14">作物编码:</label>
-        <input type="number" name="input14" id="input14" required><br>
-
+    <form id="prediction-form">
+        <label for="feature1">土层深度(cm):</label>
+        <input type="text" name="feature1" id="feature1" required><br>
+        <label for="feature2">地膜覆盖年限:</label>
+        <input type="text" name="feature2" id="feature2" required><br>
+        <label for="feature3">平均风速:</label>
+        <input type="text" name="feature3" id="feature3" required><br>
+        <label for="feature4">年均温度:</label>
+        <input type="text" name="feature4" id="feature4" required><br>
+        <label for="feature5">日照时数:</label>
+        <input type="text" name="feature5" id="feature5" required><br>
+        <label for="feature6">相对湿度:</label>
+        <input type="text" name="feature6" id="feature6" required><br>
+        <label for="feature7">平均气压:</label>
+        <input type="text" name="feature7" id="feature7" required><br>
+        <label for="feature8">降水量:</label>
+        <input type="text" name="feature8" id="feature8" required><br>
+        <label for="feature9">平均地温:</label>
+        <input type="text" name="feature9" id="feature9" required><br>
+        <label for="feature10">年蒸发量:</label>
+        <input type="text" name="feature10" id="feature10" required><br>
+        <label for="feature11">沙质占比:</label>
+        <input type="text" name="feature11" id="feature11" required><br>
+        <label for="feature12">黏土占比:</label>
+        <input type="text" name="feature12" id="feature12" required><br>
+        <label for="feature13">淤泥占比:</label>
+        <input type="text" name="feature13" id="feature13" required><br>
+        <label for="feature14">作物编码:</label>
+        <input type="text" name="feature14" id="feature14" required><br>
         <button type="submit">Predict</button>
     </form>
 
     <script>
-        // 获取表单元素
-        const form = document.getElementById('predictionForm');
+        // 加载模型
+        async function loadModel() {
+            const model = await tf.loadLayersModel('model.json');
+            return model;
+        }
 
-        // 表单提交事件处理程序
-        form.addEventListener('submit', async function (event) {
+        // 处理表单提交事件
+        async function handleSubmit(event) {
             event.preventDefault();
 
-            // 获取输入值
-            const input1 = parseFloat(document.getElementById('input1').value);
-            const input2 = parseFloat(document.getElementById('input2').value);
-            const input3 = parseFloat(document.getElementById('input3').value);
-            const input4 = parseFloat(document.getElementById('input4').value);
-            const input5 = parseFloat(document.getElementById('input5').value);
-            const input6 = parseFloat(document.getElementById('input6').value);
-            const input7 = parseFloat(document.getElementById('input7').value);
-            const input8 = parseFloat(document.getElementById('input8').value);
-            const input9 = parseFloat(document.getElementById('input9').value);
-            const input10 = parseFloat(document.getElementById('input10').value);
-            const input11 = parseFloat(document.getElementById('input11').value);
-            const input12 = parseFloat(document.getElementById('input12').value);
-            const input13 = parseFloat(document.getElementById('input13').value);
-            const input14 = parseFloat(document.getElementById('input14').value);
+            const formData = new FormData(event.target);
+            const feature1 = Number(formData.get('feature1'));
+            const feature2 = Number(formData.get('feature2'));
+            const feature3 = Number(formData.get('feature3'));
+            const feature4 = Number(formData.get('feature4'));
+            const feature5 = Number(formData.get('feature5'));
+            const feature6 = Number(formData.get('feature6'));
+            const feature7 = Number(formData.get('feature7'));
+            const feature8 = Number(formData.get('feature8'));
+            const feature9 = Number(formData.get('feature9'));
+            const feature10 = Number(formData.get('feature10'));
+            const feature11 = Number(formData.get('feature11'));
+            const feature12 = Number(formData.get('feature12'));
+            const feature13 = Number(formData.get('feature13'));
+            const feature14 = Number(formData.get('feature14'));
 
-            // 构建输入数据数组
-            const inputData = [input1, input2, input3, input4, input5, input6, input7, input8, input9, input10, input11, input12, input13, input14];
+            // 加载模型
+            const model = await loadModel();
 
-            // 加载 TensorFlow.js 模型
-            const model = await tf.loadLayersModel('tfjs_model/model.json');
+            // 对输入进行预处理
+            const input = tf.tensor([[feature1, feature2, feature3, feature4, feature5, feature6, feature7, feature8, feature9, feature10, feature11, feature12, feature13, feature14]]);
 
             // 进行预测
-            const inputTensor = tf.tensor2d([inputData], [1, inputData.length]);
-            const prediction = model.predict(inputTensor);
-            const output = Array.from(prediction.dataSync());
+            const prediction = model.predict(input);
 
-            // 显示预测结果
-            console.log(output);
-        });
+            // 打印预测结果
+            prediction.print();
+        }
+
+        // 绑定表单提交事件处理程序
+        const form = document.getElementById('prediction-form');
+        form.addEventListener('submit', handleSubmit);
     </script>
 </body>
 </html>
