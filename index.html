@@ -6,8 +6,48 @@
 <body>
     <h1>Model Prediction</h1>
     <form onsubmit="predict(event)">
-        <label for="feature">Feature:</label>
-        <input type="text" id="feature" required>
+        <label for="土层深度">土层深度(cm):</label>
+        <input type="text" id="土层深度" required><br>
+
+        <label for="地膜覆盖年限">地膜覆盖年限:</label>
+        <input type="text" id="地膜覆盖年限" required><br>
+
+        <label for="平均风速">平均风速:</label>
+        <input type="text" id="平均风速" required><br>
+
+        <label for="年均温度">年均温度:</label>
+        <input type="text" id="年均温度" required><br>
+
+        <label for="日照时数">日照时数:</label>
+        <input type="text" id="日照时数" required><br>
+
+        <label for="相对湿度">相对湿度:</label>
+        <input type="text" id="相对湿度" required><br>
+
+        <label for="平均气压">平均气压:</label>
+        <input type="text" id="平均气压" required><br>
+
+        <label for="降水量">降水量:</label>
+        <input type="text" id="降水量" required><br>
+
+        <label for="平均地温">平均地温:</label>
+        <input type="text" id="平均地温" required><br>
+
+        <label for="年蒸发量">年蒸发量:</label>
+        <input type="text" id="年蒸发量" required><br>
+
+        <label for="沙质占比">沙质占比:</label>
+        <input type="text" id="沙质占比" required><br>
+
+        <label for="黏土占比">黏土占比:</label>
+        <input type="text" id="黏土占比" required><br>
+
+        <label for="淤泥占比">淤泥占比:</label>
+        <input type="text" id="淤泥占比" required><br>
+
+        <label for="作物编码">作物编码:</label>
+        <input type="text" id="作物编码" required><br>
+
         <button type="submit">Predict</button>
     </form>
 
@@ -24,13 +64,26 @@
             event.preventDefault();
 
             // 获取输入值
-            const feature = document.getElementById("feature").value;
+            const 土层深度 = document.getElementById("土层深度").value;
+            const 地膜覆盖年限 = document.getElementById("地膜覆盖年限").value;
+            const 平均风速 = document.getElementById("平均风速").value;
+            const 年均温度 = document.getElementById("年均温度").value;
+            const 日照时数 = document.getElementById("日照时数").value;
+            const 相对湿度 = document.getElementById("相对湿度").value;
+            const 平均气压 = document.getElementById("平均气压").value;
+            const 降水量 = document.getElementById("降水量").value;
+            const 平均地温 = document.getElementById("平均地温").value;
+            const 年蒸发量 = document.getElementById("年蒸发量").value;
+            const 沙质占比 = document.getElementById("沙质占比").value;
+            const 黏土占比 = document.getElementById("黏土占比").value;
+            const 淤泥占比 = document.getElementById("淤泥占比").value;
+            const 作物编码 = document.getElementById("作物编码").value;
 
             // 加载模型
             const model = await loadModel();
 
             // 进行预测
-            const prediction = model.predict([feature]);
+            const prediction = model.predict([[土层深度, 地膜覆盖年限, 平均风速, 年均温度, 日照时数, 相对湿度, 平均气压, 降水量, 平均地温, 年蒸发量, 沙质占比, 黏土占比, 淤泥占比, 作物编码]]);  // 将变量值传递给模型
 
             // 显示预测结果
             alert("Prediction: " + prediction);
