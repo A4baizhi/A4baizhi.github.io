@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset = "UTF-8">
-    </head>
-    <body>
-        <div id="app">
-            hello world!
-        </div>
-    </body>
+<head>
+    <title>Model Prediction</title>
+</head>
+<body>
+    <h1>Model Prediction</h1>
+    <form action="/predict" method="POST">
+        <label for="feature">Feature:</label>
+        <input type="text" name="feature" id="feature" required>
+        <button type="submit">Predict</button>
+    </form>
+</body>
 </html>
