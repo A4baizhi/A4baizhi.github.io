@@ -5,10 +5,36 @@
 </head>
 <body>
     <h1>Model Prediction</h1>
-    <form action="/predict" method="POST">
+    <form onsubmit="predict(event)">
         <label for="feature">Feature:</label>
-        <input type="text" name="feature" id="feature" required>
+        <input type="text" id="feature" required>
         <button type="submit">Predict</button>
     </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/scikit-learn@0.24.2/dist/scikit-learn.min.js"></script>
+    <script>
+        async function loadModel() {
+            const response = await fetch('model.json');
+            const modelData = await response.json();
+            const model = sklearn.KNeighborsClassifier.load(modelData);
+            return model;
+        }
+
+        async function predict(event) {
+            event.preventDefault();
+
+            // 获取输入值
+            const feature = document.getElementById("feature").value;
+
+            // 加载模型
+            const model = await loadModel();
+
+            // 进行预测
+            const prediction = model.predict([feature]);
+
+            // 显示预测结果
+            alert("Prediction: " + prediction);
+        }
+    </script>
 </body>
 </html>
