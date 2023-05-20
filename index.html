@@ -2,92 +2,95 @@
 <html>
 <head>
     <title>Model Prediction</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js"></script>
+    <script src="tfjs_model/model.js"></script>
 </head>
 <body>
     <h1>Model Prediction</h1>
-    <form onsubmit="predict(event)">
-        <label for="土层深度">土层深度(cm):</label>
-        <input type="text" id="土层深度" required><br>
+    <form id="predictionForm">
+        <label for="input1">土层深度(cm):</label>
+        <input type="number" name="input1" id="input1" required><br>
 
-        <label for="地膜覆盖年限">地膜覆盖年限:</label>
-        <input type="text" id="地膜覆盖年限" required><br>
+        <label for="input2">地膜覆盖年限:</label>
+        <input type="number" name="input2" id="input2" required><br>
 
-        <label for="平均风速">平均风速:</label>
-        <input type="text" id="平均风速" required><br>
+        <label for="input3">平均风速:</label>
+        <input type="number" name="input3" id="input3" required><br>
 
-        <label for="年均温度">年均温度:</label>
-        <input type="text" id="年均温度" required><br>
+        <label for="input4">年均温度:</label>
+        <input type="number" name="input4" id="input4" required><br>
 
-        <label for="日照时数">日照时数:</label>
-        <input type="text" id="日照时数" required><br>
+        <label for="input5">日照时数:</label>
+        <input type="number" name="input5" id="input5" required><br>
 
-        <label for="相对湿度">相对湿度:</label>
-        <input type="text" id="相对湿度" required><br>
+        <label for="input6">相对湿度:</label>
+        <input type="number" name="input6" id="input6" required><br>
 
-        <label for="平均气压">平均气压:</label>
-        <input type="text" id="平均气压" required><br>
+        <label for="input7">平均气压:</label>
+        <input type="number" name="input7" id="input7" required><br>
 
-        <label for="降水量">降水量:</label>
-        <input type="text" id="降水量" required><br>
+        <label for="input8">降水量:</label>
+        <input type="number" name="input8" id="input8" required><br>
 
-        <label for="平均地温">平均地温:</label>
-        <input type="text" id="平均地温" required><br>
+        <label for="input9">平均地温:</label>
+        <input type="number" name="input9" id="input9" required><br>
 
-        <label for="年蒸发量">年蒸发量:</label>
-        <input type="text" id="年蒸发量" required><br>
+        <label for="input10">年蒸发量:</label>
+        <input type="number" name="input10" id="input10" required><br>
 
-        <label for="沙质占比">沙质占比:</label>
-        <input type="text" id="沙质占比" required><br>
+        <label for="input11">沙质占比:</label>
+        <input type="number" name="input11" id="input11" required><br>
 
-        <label for="黏土占比">黏土占比:</label>
-        <input type="text" id="黏土占比" required><br>
+        <label for="input12">黏土占比:</label>
+        <input type="number" name="input12" id="input12" required><br>
 
-        <label for="淤泥占比">淤泥占比:</label>
-        <input type="text" id="淤泥占比" required><br>
+        <label for="input13">淤泥占比:</label>
+        <input type="number" name="input13" id="input13" required><br>
 
-        <label for="作物编码">作物编码:</label>
-        <input type="text" id="作物编码" required><br>
+        <label for="input14">作物编码:</label>
+        <input type="number" name="input14" id="input14" required><br>
 
         <button type="submit">Predict</button>
     </form>
 
-    <script src="https://cdn.jsdelivr.net/npm/scikit-learn@0.24.2/dist/scikit-learn.min.js"></script>
     <script>
-        async function loadModel() {
-            const response = await fetch('model.json');
-            const modelData = await response.json();
-            const model = sklearn.KNeighborsClassifier.load(modelData);
-            return model;
-        }
+        // 获取表单元素
+        const form = document.getElementById('predictionForm');
 
-        async function predict(event) {
+        // 表单提交事件处理程序
+        form.addEventListener('submit', async function (event) {
             event.preventDefault();
 
             // 获取输入值
-            const 土层深度 = document.getElementById("土层深度").value;
-            const 地膜覆盖年限 = document.getElementById("地膜覆盖年限").value;
-            const 平均风速 = document.getElementById("平均风速").value;
-            const 年均温度 = document.getElementById("年均温度").value;
-            const 日照时数 = document.getElementById("日照时数").value;
-            const 相对湿度 = document.getElementById("相对湿度").value;
-            const 平均气压 = document.getElementById("平均气压").value;
-            const 降水量 = document.getElementById("降水量").value;
-            const 平均地温 = document.getElementById("平均地温").value;
-            const 年蒸发量 = document.getElementById("年蒸发量").value;
-            const 沙质占比 = document.getElementById("沙质占比").value;
-            const 黏土占比 = document.getElementById("黏土占比").value;
-            const 淤泥占比 = document.getElementById("淤泥占比").value;
-            const 作物编码 = document.getElementById("作物编码").value;
+            const input1 = parseFloat(document.getElementById('input1').value);
+            const input2 = parseFloat(document.getElementById('input2').value);
+            const input3 = parseFloat(document.getElementById('input3').value);
+            const input4 = parseFloat(document.getElementById('input4').value);
+            const input5 = parseFloat(document.getElementById('input5').value);
+            const input6 = parseFloat(document.getElementById('input6').value);
+            const input7 = parseFloat(document.getElementById('input7').value);
+            const input8 = parseFloat(document.getElementById('input8').value);
+            const input9 = parseFloat(document.getElementById('input9').value);
+            const input10 = parseFloat(document.getElementById('input10').value);
+            const input11 = parseFloat(document.getElementById('input11').value);
+            const input12 = parseFloat(document.getElementById('input12').value);
+            const input13 = parseFloat(document.getElementById('input13').value);
+            const input14 = parseFloat(document.getElementById('input14').value);
 
-            // 加载模型
-            const model = await loadModel();
+            // 构建输入数据数组
+            const inputData = [input1, input2, input3, input4, input5, input6, input7, input8, input9, input10, input11, input12, input13, input14];
+
+            // 加载 TensorFlow.js 模型
+            const model = await tf.loadLayersModel('tfjs_model/model.json');
 
             // 进行预测
-            const prediction = model.predict([[土层深度, 地膜覆盖年限, 平均风速, 年均温度, 日照时数, 相对湿度, 平均气压, 降水量, 平均地温, 年蒸发量, 沙质占比, 黏土占比, 淤泥占比, 作物编码]]);  // 将变量值传递给模型
+            const inputTensor = tf.tensor2d([inputData], [1, inputData.length]);
+            const prediction = model.predict(inputTensor);
+            const output = Array.from(prediction.dataSync());
 
             // 显示预测结果
-            alert("Prediction: " + prediction);
-        }
+            console.log(output);
+        });
     </script>
 </body>
 </html>
