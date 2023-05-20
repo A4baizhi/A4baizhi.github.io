@@ -5,7 +5,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.7.0/dist/tf.min.js"></script>
 </head>
 <body>
-    <h1>Model Prediction 0.0.3</h1>
+    <h1>Model Prediction 0.0.5</h1>
     <form id="prediction-form">
         <label for="feature1">土层深度(cm):</label>
         <input type="text" name="feature1" id="feature1" required><br>
@@ -67,15 +67,27 @@
             const feature12 = Number(formData.get('feature12'));
             const feature13 = Number(formData.get('feature13'));
             const feature14 = Number(formData.get('feature14'));
-
+            
+            // 标准化函数
+            function normalizeData(data, mean, std) {
+                return data.map((value, i) => (value - mean[i]) / std[i]);
+            }
+            
             // 加载模型
             const model = await loadModel();
-
+            // 加载标准化参数（均值和标准差）
+            const scalerParams = await fetch('scaler_params.json').then(response => response.json());
+            const { mean, std } = scalerParams;
+            
+            
             // 对输入进行预处理
             const input = tf.tensor([[feature1, feature2, feature3, feature4, feature5, feature6, feature7, feature8, feature9, feature10, feature11, feature12, feature13, feature14]]);
 
+            // 标准化数据
+            const normalizedInput = normalizeData(input, mean, std);
+            
             // 进行预测
-            const prediction = model.predict(input);
+            const prediction = model.predict(normalizedInput);
             
             // 显示结果
             const resultElement = document.getElementById('result');
