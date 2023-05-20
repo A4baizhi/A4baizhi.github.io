@@ -1,0 +1,1 @@
+{"accept_sparse": false, "check_inverse": true, "feature_names_out": null, "func": "<function scaler_transform at 0x7e93c00771c0>", "inv_kw_args": null, "inverse_func": null, "kw_args": {"scaler": "StandardScaler()"}, "validate": false}
