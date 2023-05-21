@@ -55,7 +55,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.7.0/dist/tf.min.js"></script>
 </head>
 <body>
-    <h1>Model Prediction 0.1.9</h1>
+    <h1>Model Prediction 0.1.10</h1>
     <form id="prediction-form">
         <label for="feature1">土层深度(cm):</label>
         <input type="text" name="feature1" id="feature1" required>
@@ -77,7 +77,7 @@
         <input type="text" name="feature5" id="feature5" required>
         <span id="feature5-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
         
-        <label for="feature6">相对湿度:</label>
+        <label for="feature6">相对湿度(%):</label>
         <input type="text" name="feature6" id="feature6" required>
         <span id="feature6-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
         
@@ -110,7 +110,7 @@
         <span id="feature13-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
         
         <label for="feature14">所种作物:</label>
-        <select name="feature14" id="feature14" required>
+        <select name="feature14" id="feature14" required style=“width:100%”>
             <option value="0">Acer truncatum</option>
             <option value="1">Alamo</option>
             <option value="2">Apple</option>
