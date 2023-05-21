@@ -19,21 +19,12 @@
             font-weight: bold;
         }
 
-        input[type="text"] {
-            width: 200px;
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        
+        input[type="text"],
         select {
             width: 200px;
             padding: 5px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            appearance: none;
-            -moz-appearance: none;
-            -webkit-appearance: none;
         }
 
 
@@ -64,7 +55,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.7.0/dist/tf.min.js"></script>
 </head>
 <body>
-    <h1>Model Prediction 0.1.8</h1>
+    <h1>Model Prediction 0.1.9</h1>
     <form id="prediction-form">
         <label for="feature1">土层深度(cm):</label>
         <input type="text" name="feature1" id="feature1" required>
