@@ -87,7 +87,7 @@
             const standardizedFeatures = standardizeFeatures(inputFeatures);
 
             // 创建输入张量
-            const input = tf.tensor([standardizedFeatures]);
+            const input = tf.tensor2D([standardizedFeatures]);
             
             // 进行预测
             const prediction = model.predict(input);
