@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Model Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin-left: 25%
+        }
+
+        h1 {
+            //text-align: center;
+        }
+
+        label {
+            display: inline-block;
+            width: 180px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        select {
+            box-sizing: border-box;
+            width: 200px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+
+        button[type="submit"] {
+            display: block;
+            width: 40%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        p#result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        
+        .warning {
+            display: inline-block;
+            margin-left: 7%;
+            color: red;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.7.0/dist/tf.min.js"></script>
+</head>
+<body>
+    <h1>在线覆膜土壤微塑料丰度预测模型 0.1.10</h1>
+    <form id="prediction-form">
+        <label for="feature1">土层深度(cm):</label>
+        <input type="text" name="feature1" id="feature1" required>
+        <span id="feature1-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
+        
+        <label for="feature2">地膜覆盖年限(年):</label>
+        <input type="text" name="feature2" id="feature2" required>
+        <span id="feature2-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
+        
+        <label for="feature3">平均风速(m/s):</label>
+        <input type="text" name="feature3" id="feature3" required>
+        <span id="feature3-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
+        
+        <label for="feature4">年均温度(℃):</label>
+        <input type="text" name="feature4" id="feature4" required>
+        <span id="feature4-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
+        
+        <label for="feature5">日照时数(h):</label>
+        <input type="text" name="feature5" id="feature5" required>
+        <span id="feature5-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
+        
+        <label for="feature6">相对湿度(%):</label>
+        <input type="text" name="feature6" id="feature6" required>
+        <span id="feature6-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
+        
+        <label for="feature7">平均气压(kPa):</label>
+        <input type="text" name="feature7" id="feature7" required>
+        <span id="feature7-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
+        
+        <label for="feature8">降水量(mm):</label>
+        <input type="text" name="feature8" id="feature8" required>
+        <span id="feature8-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
+        
+        <label for="feature9">平均地温(℃):</label>
+        <input type="text" name="feature9" id="feature9" required>
+        <span id="feature9-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
+        
+        <label for="feature10">年蒸发量(mm):</label>
+        <input type="text" name="feature10" id="feature10" required>
+        <span id="feature10-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
+        
+        <label for="feature11">沙质占比(%):</label>
+        <input type="text" name="feature11" id="feature11" required>
+        <span id="feature11-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
+        
+        <label for="feature12">黏土占比(%):</label>
+        <input type="text" name="feature12" id="feature12" required>
+        <span id="feature12-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
+        
+        <label for="feature13">淤泥占比(%):</label>
+        <input type="text" name="feature13" id="feature13" required>
+        <span id="feature13-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
+        
+        <label for="feature14">所种作物:</label>
+        <select name="feature14" id="feature14" required style=“width:100%”>
+            <option value="0">Acer truncatum</option>
+            <option value="1">Alamo</option>
+            <option value="2">Apple</option>
+            <option value="3">Beet</option>
+            <option value="4">Cerasifera</option>
+            <option value="5">Cherry</option>
+            <option value="6">Chinese cabbage</option>
+            <option value="7">Corn</option>
+            <option value="8">Cucumber</option>
+            <option value="9">Locust tree</option>
+            <option value="10">Peach</option>
+            <option value="11">Peanut</option>
+            <option value="12">Plum</option>
+            <option value="13">Potato</option>
+            <option value="14">Pumpkin</option>
+            <option value="15">Rice</option>
+            <option value="16">Sunflower</option>
+            <option value="17">Tobacco</option>
+            <option value="18">Tomato</option>
+            <option value="19">Vegetable</option>
+            <option value="20">Wheat</option>
+            <option value="21">Other</option>
+        </select><br>
+
+        
+        <button type="submit">Predict</button>
+        
+        <p id="result"></p>
+    </form>
+
+
+    <script>
+        // 加载模型
+        async function loadModel() {
+            const model = await tf.loadLayersModel('model.json');
+            return model;
+        }
+
+        // 处理表单提交事件
+        async function handleSubmit(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const feature1 = Number(formData.get('feature1'));
+            const feature2 = Number(formData.get('feature2'));
+            const feature3 = Number(formData.get('feature3'));
+            const feature4 = Number(formData.get('feature4'));
+            const feature5 = Number(formData.get('feature5'));
+            const feature6 = Number(formData.get('feature6'));
+            const feature7 = Number(formData.get('feature7'));
+            const feature8 = Number(formData.get('feature8'));
+            const feature9 = Number(formData.get('feature9'));
+            const feature10 = Number(formData.get('feature10'));
+            const feature11 = Number(formData.get('feature11'));
+            const feature12 = Number(formData.get('feature12'));
+            const feature13 = Number(formData.get('feature13'));
+            const feature14 = Number(formData.get('feature14'));
+            
+            // 加载模型
+            const model = await loadModel();
+            
+            // 加载标准化参数（均值和标准差）
+            const scalerParams = await fetch('scaler_params.json').then(response => response.json());
+            const { mean, std } = scalerParams;
+
+            // 定义标准化函数
+            function standardizeFeatures(features) {
+                return features.map((feature, index) => (feature - mean[index]) / std[index]);
+            }
+                        
+            // 对输入进行预处理
+            const inputFeatures = [feature1, feature2, feature3, feature4, feature5, feature6, feature7, feature8, feature9, feature10, feature11, feature12, feature13, feature14];
+            
+            // 对输入特征进行标准化
+            const standardizedFeatures = standardizeFeatures(inputFeatures);
+
+            // 创建输入张量
+            const input = tf.tensor2d([standardizedFeatures]);
+            
+            // 进行预测
+            const prediction = model.predict(input);
+            
+            // 显示结果
+            const resultElement = document.getElementById('result');
+            resultElement.innerText = `预测结果: ${prediction.dataSync()[0]}`;
+            
+            // 打印预测结果
+            prediction.print();
+        }
+
+        // 绑定表单提交事件处理程序
+        const form = document.getElementById('prediction-form');
+        form.addEventListener('submit', handleSubmit);
+        
+        // 通用的特征输入验证和警告显示函数
+            function handleFeatureInput(featureId, minValue, maxValue) {
+                const featureInput = document.getElementById(featureId);
+                const featureWarning = document.getElementById(`${featureId}-warning`);
+                featureInput.addEventListener('input', function() {
+                    const inputValue = Number(featureInput.value);
+                    if (isNaN(inputValue) || inputValue < minValue || inputValue > maxValue) {
+                        featureWarning.style.display = 'inline-block';
+                    } else {
+                        featureWarning.style.display = 'none';
+                    }
+                });
+            }
+
+            // 调用特征输入验证和警告显示函数来处理每个特征
+            handleFeatureInput('feature1', 0, 35); 
+            handleFeatureInput('feature2', 0, 50);
+            handleFeatureInput('feature3', 1, 3);
+            handleFeatureInput('feature4', 0, 30);
+            handleFeatureInput('feature5', 1000, 4000);
+            handleFeatureInput('feature6', 50, 100);
+            handleFeatureInput('feature7', 700, 1100);
+            handleFeatureInput('feature8', 0, 2000);
+            handleFeatureInput('feature9', 0, 30);
+            handleFeatureInput('feature10', 100, 2000);
+            handleFeatureInput('feature11', 0, 100);
+            handleFeatureInput('feature12', 0, 100);
+            handleFeatureInput('feature13', 0, 100);
+            // 调整范围
+    </script>
+</body>
+</html>
