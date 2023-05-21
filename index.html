@@ -57,7 +57,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.7.0/dist/tf.min.js"></script>
 </head>
 <body>
-    <h1>Model Prediction 0.1.2</h1>
+    <h1>Model Prediction 0.1.3</h1>
     <form id="prediction-form">
         <label for="feature1">土层深度(cm):</label>
         <input type="text" name="feature1" id="feature1" required>
@@ -146,36 +146,6 @@
             const feature13 = Number(formData.get('feature13'));
             const feature14 = Number(formData.get('feature14'));
             
-            // 通用的特征输入验证和警告显示函数
-            function handleFeatureInput(featureId, minValue, maxValue) {
-                const featureInput = document.getElementById(featureId);
-                const featureWarning = document.getElementById(`${featureId}-warning`);
-                featureInput.addEventListener('input', function() {
-                    const inputValue = Number(featureInput.value);
-                    if (isNaN(inputValue) || inputValue < minValue || inputValue > maxValue) {
-                        featureWarning.style.display = 'inline-block';
-                    } else {
-                        featureWarning.style.display = 'none';
-                    }
-                });
-            }
-
-            // 调用特征输入验证和警告显示函数来处理每个特征
-            handleFeatureInput('feature1', 0, 35); 
-            handleFeatureInput('feature2', 0, 50);
-            handleFeatureInput('feature3', 1, 3);
-            handleFeatureInput('feature4', 0, 30);
-            handleFeatureInput('feature5', 1000, 4000);
-            handleFeatureInput('feature6', 50, 100);
-            handleFeatureInput('feature7', 700, 1100);
-            handleFeatureInput('feature8', 0, 2000);
-            handleFeatureInput('feature9', 0, 30);
-            handleFeatureInput('feature10', 100, 2000);
-            handleFeatureInput('feature11', 0, 100);
-            handleFeatureInput('feature12', 0, 100);
-            handleFeatureInput('feature13', 0, 100);
-            // 调整范围
-            
             // 加载模型
             const model = await loadModel();
             
@@ -211,6 +181,36 @@
         // 绑定表单提交事件处理程序
         const form = document.getElementById('prediction-form');
         form.addEventListener('submit', handleSubmit);
+        
+        // 通用的特征输入验证和警告显示函数
+            function handleFeatureInput(featureId, minValue, maxValue) {
+                const featureInput = document.getElementById(featureId);
+                const featureWarning = document.getElementById(`${featureId}-warning`);
+                featureInput.addEventListener('input', function() {
+                    const inputValue = Number(featureInput.value);
+                    if (isNaN(inputValue) || inputValue < minValue || inputValue > maxValue) {
+                        featureWarning.style.display = 'inline-block';
+                    } else {
+                        featureWarning.style.display = 'none';
+                    }
+                });
+            }
+
+            // 调用特征输入验证和警告显示函数来处理每个特征
+            handleFeatureInput('feature1', 0, 35); 
+            handleFeatureInput('feature2', 0, 50);
+            handleFeatureInput('feature3', 1, 3);
+            handleFeatureInput('feature4', 0, 30);
+            handleFeatureInput('feature5', 1000, 4000);
+            handleFeatureInput('feature6', 50, 100);
+            handleFeatureInput('feature7', 700, 1100);
+            handleFeatureInput('feature8', 0, 2000);
+            handleFeatureInput('feature9', 0, 30);
+            handleFeatureInput('feature10', 100, 2000);
+            handleFeatureInput('feature11', 0, 100);
+            handleFeatureInput('feature12', 0, 100);
+            handleFeatureInput('feature13', 0, 100);
+            // 调整范围
     </script>
 </body>
 </html>
