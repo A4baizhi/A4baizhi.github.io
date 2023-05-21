@@ -53,7 +53,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.7.0/dist/tf.min.js"></script>
 </head>
 <body>
-    <h1>Model Prediction 0.1.7</h1>
+    <h1>Model Prediction 0.1.8</h1>
     <form id="prediction-form">
         <label for="feature1">土层深度(cm):</label>
         <input type="text" name="feature1" id="feature1" required>
@@ -108,7 +108,31 @@
         <span id="feature13-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
         
         <label for="feature14">作物编码:</label>
-        <input type="text" name="feature14" id="feature14" required><br>
+        <select name="feature14" id="feature14" required>
+            <option value="0">Acer truncatum</option>
+            <option value="1">Alamo</option>
+            <option value="2">Apple</option>
+            <option value="3">Beet</option>
+            <option value="4">Cerasifera</option>
+            <option value="5">Cherry</option>
+            <option value="6">Chinese cabbage</option>
+            <option value="7">Corn</option>
+            <option value="8">Cucumber</option>
+            <option value="9">Locust tree</option>
+            <option value="10">Peach</option>
+            <option value="11">Peanut</option>
+            <option value="12">Plum</option>
+            <option value="13">Potato</option>
+            <option value="14">Pumpkin</option>
+            <option value="15">Rice</option>
+            <option value="16">Sunflower</option>
+            <option value="17">Tobacco</option>
+            <option value="18">Tomato</option>
+            <option value="19">Vegetable</option>
+            <option value="20">Wheat</option>
+            <option value="21">Other</option>
+        </select><br>
+
         
         <button type="submit">Predict</button>
         
