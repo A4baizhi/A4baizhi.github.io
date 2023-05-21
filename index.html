@@ -53,59 +53,59 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.7.0/dist/tf.min.js"></script>
 </head>
 <body>
-    <h1>Model Prediction 0.1.6</h1>
+    <h1>Model Prediction 0.1.7</h1>
     <form id="prediction-form">
         <label for="feature1">土层深度(cm):</label>
         <input type="text" name="feature1" id="feature1" required>
-        <span id="feature1-warning" class="warning" style="display: none;">请输入有效的数值范围。</span><br>
+        <span id="feature1-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
         
-        <label for="feature2">地膜覆盖年限:</label>
+        <label for="feature2">地膜覆盖年限(年):</label>
         <input type="text" name="feature2" id="feature2" required>
-        <span id="feature2-warning" class="warning" style="display: none;">请输入有效的数值范围。</span><br>
+        <span id="feature2-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
         
-        <label for="feature3">平均风速:</label>
+        <label for="feature3">平均风速(m/s):</label>
         <input type="text" name="feature3" id="feature3" required>
-        <span id="feature3-warning" class="warning" style="display: none;">请输入有效的数值范围。</span><br>
+        <span id="feature3-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
         
-        <label for="feature4">年均温度:</label>
+        <label for="feature4">年均温度(℃):</label>
         <input type="text" name="feature4" id="feature4" required>
-        <span id="feature4-warning" class="warning" style="display: none;">请输入有效的数值范围。</span><br>
+        <span id="feature4-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
         
-        <label for="feature5">日照时数:</label>
+        <label for="feature5">日照时数(h):</label>
         <input type="text" name="feature5" id="feature5" required>
-        <span id="feature5-warning" class="warning" style="display: none;">请输入有效的数值范围。</span><br>
+        <span id="feature5-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
         
         <label for="feature6">相对湿度:</label>
         <input type="text" name="feature6" id="feature6" required>
-        <span id="feature6-warning" class="warning" style="display: none;">请输入有效的数值范围。</span><br>
+        <span id="feature6-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
         
-        <label for="feature7">平均气压:</label>
+        <label for="feature7">平均气压(kPa):</label>
         <input type="text" name="feature7" id="feature7" required>
-        <span id="feature7-warning" class="warning" style="display: none;">请输入有效的数值范围。</span><br>
+        <span id="feature7-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
         
         <label for="feature8">降水量:</label>
         <input type="text" name="feature8" id="feature8" required>
-        <span id="feature8-warning" class="warning" style="display: none;">请输入有效的数值范围。</span><br>
+        <span id="feature8-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
         
-        <label for="feature9">平均地温:</label>
+        <label for="feature9">平均地温(℃):</label>
         <input type="text" name="feature9" id="feature9" required>
-        <span id="feature9-warning" class="warning" style="display: none;">请输入有效的数值范围。</span><br>
+        <span id="feature9-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
         
-        <label for="feature10">年蒸发量:</label>
+        <label for="feature10">年蒸发量(mm):</label>
         <input type="text" name="feature10" id="feature10" required>
-        <span id="feature10-warning" class="warning" style="display: none;">请输入有效的数值范围。</span><br>
+        <span id="feature10-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
         
-        <label for="feature11">沙质占比:</label>
+        <label for="feature11">沙质占比(%):</label>
         <input type="text" name="feature11" id="feature11" required>
-        <span id="feature11-warning" class="warning" style="display: none;">请输入有效的数值范围。</span><br>
+        <span id="feature11-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
         
-        <label for="feature12">黏土占比:</label>
+        <label for="feature12">黏土占比(%):</label>
         <input type="text" name="feature12" id="feature12" required>
-        <span id="feature12-warning" class="warning" style="display: none;">请输入有效的数值范围。</span><br>
+        <span id="feature12-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
         
-        <label for="feature13">淤泥占比:</label>
+        <label for="feature13">淤泥占比(%):</label>
         <input type="text" name="feature13" id="feature13" required>
-        <span id="feature13-warning" class="warning" style="display: none;">请输入有效的数值范围。</span><br>
+        <span id="feature13-warning" class="warning" style="display: none;">警告：超出数值范围，可能导致不可预料的结果。</span><br>
         
         <label for="feature14">作物编码:</label>
         <input type="text" name="feature14" id="feature14" required><br>
