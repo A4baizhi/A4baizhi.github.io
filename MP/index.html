@@ -56,7 +56,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.7.0/dist/tf.min.js"></script>
 </head>
 <body>
-    <h1>在线覆膜土壤微塑料丰度预测模型 0.1.11</h1>
+    <h1>在线覆膜土壤微塑料丰度预测模型 0.1.12</h1>
     <form id="prediction-form">
         <label for="feature1">土层深度(cm):</label>
         <input type="text" name="feature1" id="feature1" required>
@@ -146,7 +146,7 @@
     <script>
         // 加载模型
         async function loadModel() {
-            const model = await tf.loadLayersModel('MP/model.json');
+            const model = await tf.loadLayersModel('model.json');
             return model;
         }
 
@@ -174,7 +174,7 @@
             const model = await loadModel();
             
             // 加载标准化参数（均值和标准差）
-            const scalerParams = await fetch('MP/scaler_params.json').then(response => response.json());
+            const scalerParams = await fetch('scaler_params.json').then(response => response.json());
             const { mean, std } = scalerParams;
 
             // 定义标准化函数
